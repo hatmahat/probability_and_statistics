@@ -18,7 +18,7 @@ def portfolio_return(yrs, avg_return, sd_of_return, principal):
     return end_return
 
 res = []
-for i in range(5000): # nums simulations
+for i in range(10**3): # nums simulations
     result = portfolio_return(
         yrs=5,
         avg_return=.07,
@@ -47,10 +47,10 @@ print('max  :', n_max)
 print('min  :', n_min)
 print('mean :', n_mean)
 print('std  :', n_std)
-
-plt.axvline(x=lower_ci)
-plt.axvline(x=upper_ci)
-plt.axvline(x=u_75)
-plt.plot(np_res, (norm.pdf(np_res, n_mean, n_std)), '-')
+plt.axvline(x=n_mean, linewidth=.5, color='black', label='mean')
+plt.axvline(x=lower_ci, linewidth=.5, color='red', label='2.5%')
+plt.axvline(x=upper_ci, linewidth=.5, color='red', label='97.5%')
+plt.axvline(x=u_75, linewidth=.5, color='green', label='75%')
+plt.plot(np_res, (norm.pdf(np_res, n_mean, n_std)), linestyle='-', linewidth=.5)
 #plt.hist(np_res, bins=30)
 plt.show()
